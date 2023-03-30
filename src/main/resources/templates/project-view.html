@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View</title>
+
+<!--    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            color: #333;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover {
+            color: #76bcb9;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        a {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 15px;
+            color: #333333;
+        }
+
+        button {
+            background-color: #a3d2ca;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #76bcb9;
+            color: #fff;
+        }
+    </style>-->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin: 0 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            background-color: #76bcb9;
+            color: #fff;
+        }
+
+        main {
+            margin-top: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        section {
+            background-color: #fff;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        ul {
+            margin-bottom: 10px;
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        button {
+            background-color: #a3d2ca;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #76bcb9;
+            color: #fff;
+        }
+
+        a {
+            margin-left: 10px;
+            font-size: 15px;
+            color: #333333;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<header>
+    <h1>Project Manager</h1>
+    <nav>
+        <ul><li><a href="/login/">Log Out</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section>
+        <h2 th:text="${project.name}"></h2>
+        <p th:text="${project.description}"></p>
+        <p th:text="${project.status}"></p>
+        <ul th:each="student : ${project.studentList}">
+            <li th:text="${student.name + ' ' + student.surname}"></li>
+        </ul>
+        <a th:href="@{/project/start(id=${project.id})}">
+            <button>Start</button>
+        </a>
+        <a th:href="@{/project/finish(id=${project.id})}">
+            <button>Finish</button>
+        </a>
+    </section>
+</main>
+
+
+</body>
+</html>
