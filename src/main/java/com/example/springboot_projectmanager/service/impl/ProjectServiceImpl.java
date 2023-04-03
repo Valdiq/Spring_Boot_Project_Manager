@@ -131,9 +131,7 @@ public class ProjectServiceImpl implements ProjectService {
             predicates.add(criteriaBuilder.equal(root.get("status"), status));
         }
 
-        if (!predicates.isEmpty()) {
-            criteriaQuery.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
-        }
+        criteriaQuery.select(root).where(predicates.toArray(new Predicate[0])).orderBy(criteriaBuilder.asc(root.get("name")));
 
         return entityManager.createQuery(criteriaQuery).getResultList();
     }

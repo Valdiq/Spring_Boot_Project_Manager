@@ -61,6 +61,10 @@
             font-size: 15px;
             color: #333333;
         }
+        form p {
+            color: darkred;
+            font-size: 18px;
+        }
     </style>
 
 </head>
@@ -70,12 +74,17 @@
     <h2>Registration</h2>
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" placeholder="Enter your name" th:field="*{name}">
+    <p th:if="${#fields.hasErrors('name')}" th:errorclass="student" th:errors="*{name}"></p>
 
     <label for="surname">Surname:</label>
     <input type="text" id="surname" name="surname" placeholder="Enter your surname" th:field="*{surname}">
+    <p th:if="${#fields.hasErrors('surname')}" th:errorclass="student" th:errors="*{surname}"></p>
+
 
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" placeholder="Enter your email" th:field="*{email}">
+    <p th:if="${#fields.hasErrors('email')}" th:errorclass="student" th:errors="*{email}"></p>
+
 
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" placeholder="Enter your password" th:field="*{password}">

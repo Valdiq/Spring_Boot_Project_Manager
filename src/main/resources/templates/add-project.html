@@ -70,6 +70,10 @@
             font-size: 15px;
             color: #333333;
         }
+        form p {
+            color: darkred;
+            tab-size: 18px;
+        }
     </style>
 
 </head>
@@ -79,8 +83,10 @@
     <h2>Create New Project</h2>
     <label for="name">Name</label>
     <input type="text" id="name" name="name" placeholder="Enter project name" th:field="*{name}">
+    <p th:if="${#fields.hasErrors('name')}" th:errorclass="project" th:errors="*{name}"></p>
     <label for="description">Description</label>
     <textarea id="description" name="description" rows="5" placeholder="Enter project description" th:field="*{description}"></textarea>
+    <p th:if="${#fields.hasErrors('description')}" th:errorclass="project" th:errors="*{description}"></p>
     <button type="submit">Create Project</button>
 </form>
 

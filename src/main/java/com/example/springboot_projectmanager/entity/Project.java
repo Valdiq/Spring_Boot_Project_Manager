@@ -1,6 +1,8 @@
 package com.example.springboot_projectmanager.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +16,13 @@ public class Project {
     @Column(name = "id")
     private int id;
 
+    @Size(min = 2, message = "Name must have min 2 symbols")
+    @NotBlank(message = "Required field")
     @Column(name = "name")
     private String name;
 
+    @Size(min = 20, message = "Name must have min 20 symbols")
+    @NotBlank(message = "Required field")
     @Column(name = "description")
     private String description;
 

@@ -5,10 +5,12 @@ import com.example.springboot_projectmanager.entity.Student;
 import com.example.springboot_projectmanager.service.impl.ProjectServiceImpl;
 import com.example.springboot_projectmanager.service.impl.StudentServiceImpl;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,18 +35,23 @@ public class ProjectController {
     }
 
     @PostMapping("/add-project")
-    public String addProject(@ModelAttribute("project") Project project, HttpSession session) {
+    public String addProject(@Valid @ModelAttribute("project") Project project, BindingResult result, HttpSession session) {
 
-        Student student = (Student) session.getAttribute("loggedInUser");
+        if (result.hasErrors()) {
+            return "add-project";
+        } else {
+            Student student = (Student) session.getAttribute("loggedInUser");
 
-        student = studentService.findById(student.getId());
+            student = studentService.findById(student.getId());
 
-        student.addProject(project);
-        project.addStudent(student);
+            student.addProject(project);
+            project.addStudent(student);
 
-        projectService.saveProject(project);
+            projectService.saveProject(project);
 
-        return "redirect:/student/" + student.getId() + "/home";
+            return "redirect:/student/" + student.getId() + "/home";
+        }
+
     }
 
     @GetMapping("/show-view")
@@ -104,9 +111,11 @@ public class ProjectController {
         Student currentStudent = (Student) session.getAttribute("loggedInUser");
         currentStudent = studentService.findById(currentStudent.getId());
 
-        List<Project> projectList = projectService.findAllByNameAndStatus(prName, prStatus);
+        //List<Project> projectList = projectService.findAllByNameAndStatus(prName, prStatus);
+        List<Project> projectList = projectService.findAllByStatus(prStatus);
         currentStudent.setProjectList(projectList);
 
+        session.setAttribute("loggedInUser", currentStudent);
 
         return "redirect:/student/" + currentStudent.getId() + "/home";
     }
@@ -123,21 +132,27 @@ public class ProjectController {
 
 
     @RequestMapping("/edit")
-    public String editProject(@RequestParam("name") String name, @RequestParam("description") String description, @ModelAttribute("project") Project project, HttpSession session) {
+    public String editProject(@RequestParam("name") String name, @RequestParam("description") String description, @Valid @ModelAttribute("project") Project project, BindingResult result, HttpSession session) {
 
-        Student currStud = (Student) session.getAttribute("loggedInUser");
-        currStud = studentService.findById(currStud.getId());
+        if (result.hasErrors()) {
+            return "project-edit";
+        } else {
+            Student currStud = (Student) session.getAttribute("loggedInUser");
+            currStud = studentService.findById(currStud.getId());
 
-        Project currProject = projectService.getById(project.getId());
+            Project currProject = projectService.getById(project.getId());
 
-        currProject.setName(name);
-        currProject.setDescription(description);
-        currProject.setStatus(currProject.getStatus());
+            currProject.setName(name);
+            currProject.setDescription(description);
+            currProject.setStatus(currProject.getStatus());
 
-        projectService.saveProject(currProject);
+            projectService.saveProject(currProject);
 
 
-        return "redirect:/student/" + currStud.getId() + "/home";
+            return "redirect:/student/" + currStud.getId() + "/home";
+        }
+
+
     }
 
     @RequestMapping("/delete")
