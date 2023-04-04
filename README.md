@@ -27,3 +27,17 @@ Technologies:
 
 
 This project I have created for educational purposes to practice and upgrade my skills in Spring Framework, and web development. 
+
+During development, I have learn: 
+
+    How to develop a basic CRUD and To-Do application with Spring Boot
+    How to use Thymeleaf as a server-side template engine
+    How to develop authentication and registration system with Spring Boot and Hibernate
+    How to handle user input validation and error messages
+
+Improved my:
+    
+    Skill to work with relational databases using Hibernate (especially with Many-to-Many relations)
+    Understanding of the architecture of web application
+    Gained experience with each technology that was used
+    
