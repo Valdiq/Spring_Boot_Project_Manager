@@ -13,13 +13,13 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
     public List<Project> getAllByStatus(String status);
 
-   // @Query(value = "SELECT * FROM projects ORDER BY ?1", nativeQuery = true)
-   // public List<Project> findAllAndOrderBy(String order);
+    // @Query(value = "SELECT * FROM projects ORDER BY ?1", nativeQuery = true)
+    // public List<Project> findAllAndOrderBy(String order);
 
-    public List<Project> findAllByStatus(String status);
+    public List<Project> findAllByStatusIgnoreCase(String status);
 
     public List<Project> findAllByNameLikeIgnoreCase(String name);
 
-    public List<Project> findAllByNameAndStatus(String name, String status);
+    //   public List<Project> findAllByNameAndStatus(String name, String status);
 
 }

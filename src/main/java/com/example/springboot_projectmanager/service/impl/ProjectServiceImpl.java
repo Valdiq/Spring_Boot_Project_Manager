@@ -6,14 +6,9 @@ import com.example.springboot_projectmanager.entity.Project;
 import com.example.springboot_projectmanager.entity.Student;
 import com.example.springboot_projectmanager.service.ProjectService;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,21 +61,6 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void saveProject(Project project) {
 
-/*        Project project1 = projectRepository.getById(project.getId());
-
-        if (project1 != null) {
-            System.out.println("Error!");
-            return;
-        }
-
-        List<Project> projectList = projectRepository.findAll();
-        for (Project p : projectList) {
-            if (p.getId() == project.getId() && p.getStudentList().equals(project.getStudentList())) {
-                System.out.println("Error 2!");
-                return;
-            }
-        }*/
-
         if (project.getStatus() == null) {
             project.setStatus("Pending");
         }
@@ -99,9 +79,9 @@ public class ProjectServiceImpl implements ProjectService {
 
 
     @Override
-    public List<Project> findAllByStatus(String status) {
+    public List<Project> findAllByStatusIgnoreCase(String status) {
 
-        List<Project> projectList = projectRepository.findAllByStatus(status);
+        List<Project> projectList = projectRepository.findAllByStatusIgnoreCase(status);
 
         return projectList;
     }
@@ -114,7 +94,7 @@ public class ProjectServiceImpl implements ProjectService {
         return projectList;
     }
 
-    @Override
+/*    @Override
     public List<Project> findAllByNameAndStatus(String name, String status) {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -134,5 +114,5 @@ public class ProjectServiceImpl implements ProjectService {
         criteriaQuery.select(root).where(predicates.toArray(new Predicate[0])).orderBy(criteriaBuilder.asc(root.get("name")));
 
         return entityManager.createQuery(criteriaQuery).getResultList();
-    }
+    }*/
 }

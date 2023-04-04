@@ -9,8 +9,8 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Integer> {
     public List<Project> findStudentsByProjectList(Student student);
 
-    public Student findByEmailAndPassword (String email, String password);
+    public Student findByEmailAndPassword(String email, String password);
 
-    public Student findByEmail (String email);
+    public Student findByEmail(String email);
 
 }

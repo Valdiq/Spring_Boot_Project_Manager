@@ -63,10 +63,17 @@
             background-color: #76bcb9;
             color: #fff;
         }
+
         a {
             margin-left: 10px;
             font-size: 15px;
             color: #333333;
+        }
+
+        .error-message {
+            margin-top: 10px;
+            color: darkred;
+            font-size: 18px;
         }
     </style>
 
@@ -80,6 +87,7 @@
 
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" placeholder="Enter your password" th:field="*{password}">
+    <p class="error-message" th:if="${loginError}">Wrong Email or Password</p>
 
     <span>
     <input type="submit" value="Login">

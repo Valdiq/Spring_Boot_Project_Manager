@@ -105,6 +105,7 @@
             background-color: #76bcb9;
             color: #fff;
         }
+
         form p {
             color: darkred;
             font-size: 18px;
@@ -132,7 +133,8 @@
 
 
             <label for="description">Description:</label>
-            <textarea id="description" name="description" th:placeholder="${project.description}" th:field="*{description}"></textarea>
+            <textarea id="description" name="description" th:placeholder="${project.description}"
+                      th:field="*{description}"></textarea>
             <p th:if="${#fields.hasErrors('description')}" th:errorclass="project" th:errors="*{description}"></p>
 
 

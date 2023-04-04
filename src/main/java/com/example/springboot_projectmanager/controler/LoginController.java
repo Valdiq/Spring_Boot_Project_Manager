@@ -3,12 +3,9 @@ package com.example.springboot_projectmanager.controler;
 import com.example.springboot_projectmanager.entity.Student;
 import com.example.springboot_projectmanager.service.impl.StudentServiceImpl;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +27,7 @@ public class LoginController {
     }
 
     @PostMapping("/loginStudent")
-    public String loginStudent(@ModelAttribute("student") Student student, HttpSession session) {
+    public String loginStudent(@ModelAttribute("student") Student student, Model model, HttpSession session) {
 
         if (studentService.check(student)) {
             Student loginStud = studentService.findByEmail(student.getEmail());
@@ -38,11 +35,12 @@ public class LoginController {
 
             return "redirect:/student/" + loginStud.getId() + "/home";
         } else {
-            return "login-error";
+            model.addAttribute("loginError", true);
+            return "login-page";
         }
 
 
-       // return studentService.check(student) ? "redirect:/student/" + loginStudent.getId() + "/home" : "login-error";
+        // return studentService.check(student) ? "redirect:/student/" + loginStudent.getId() + "/home" : "login-error";
     }
 
 }

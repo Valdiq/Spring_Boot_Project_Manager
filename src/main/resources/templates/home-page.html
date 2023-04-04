@@ -123,6 +123,11 @@
         tr:hover {
             background-color: #e2e2e2;
         }
+
+        .filterButton {
+            margin-bottom: 15px;
+        }
+
     </style>
 
 </head>
@@ -137,22 +142,20 @@
     <h4></h4>
     <h2 th:text="${student.name + ' ' + student.surname + ' Projects'}"></h2>
     <form th:action="@{/project/filter}" method="get">
-    <div>
-        <label for="name-filter">Filter by Name:</label>
-        <input type="text" id="name-filter" th:name="prName" placeholder="Enter project name">
-    </div>
-    <div>
-        <label for="status-filter">Filter by Status:</label>
-        <select id="status-filter" th:name="prStatus">
-            <option value="">All</option>
-            <option value="pending">Pending</option>
-            <option value="in-progress">In Progress</option>
-            <option value="completed">Completed</option>
-        </select>
-    </div>
-    <button type="submit">Filter</button>
+        <div>
+            <label for="status-filter">Filter by Status:</label>
+            <select id="status-filter" th:name="prStatus">
+                <option value="">All</option>
+                <option value="pending">Pending</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+            </select>
+        </div>
+        <button class="filterButton" type="submit">Filter</button>
     </form>
-    <a href="/project/"><button type="button">Add</button></a>
+    <a href="/project/">
+        <button type="button">Add</button>
+    </a>
     <table>
         <thead>
         <tr>
@@ -166,9 +169,15 @@
             <td th:text="${project.name}"></td>
             <td th:text="${project.status}"></td>
             <td>
-                <a th:href="@{/project/show-view(id=${project.id})}"><button type="button">View</button></a>
-                <a th:href="@{/project/show-edit(id=${project.id})}"><button type="button">Edit</button></a>
-                <a th:href="@{/project/delete(id=${project.id})}"><button type="button">Delete</button></a>
+                <a th:href="@{/project/show-view(id=${project.id})}">
+                    <button type="button">View</button>
+                </a>
+                <a th:href="@{/project/show-edit(id=${project.id})}">
+                    <button type="button">Edit</button>
+                </a>
+                <a th:href="@{/project/delete(id=${project.id})}">
+                    <button type="button">Delete</button>
+                </a>
             </td>
         </tr>
         </tbody>

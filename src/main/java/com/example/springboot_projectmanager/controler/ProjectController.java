@@ -7,7 +7,6 @@ import com.example.springboot_projectmanager.service.impl.StudentServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -102,18 +101,15 @@ public class ProjectController {
     }
 
     @GetMapping("/filter")
-    public String filterProject(@RequestParam(name = "prName", required = false) String prName, @RequestParam(name = "prStatus", required = false) String prStatus, HttpSession session) {
-
-        System.out.println(prName);
-        System.out.println(prStatus);
-
+    public String filterProject(@RequestParam(name = "prStatus", required = false) String prStatus, HttpSession session) {
 
         Student currentStudent = (Student) session.getAttribute("loggedInUser");
         currentStudent = studentService.findById(currentStudent.getId());
 
+
         //List<Project> projectList = projectService.findAllByNameAndStatus(prName, prStatus);
-        List<Project> projectList = projectService.findAllByStatus(prStatus);
-        currentStudent.setProjectList(projectList);
+        //  List<Project> projectList = projectService.findAllByStatus(prStatus);
+        //  currentStudent.setProjectList(projectList);
 
         session.setAttribute("loggedInUser", currentStudent);
 

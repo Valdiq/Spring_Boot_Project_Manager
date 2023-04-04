@@ -14,7 +14,9 @@ public interface StudentService {
     public Student getStudentById(int id);
 
     public List<Project> findStudentsByProjectList(Student student);
-    public Student findByEmailAndPassword (String email, String password);
+
+    public Student findByEmailAndPassword(String email, String password);
+
     public void saveStudent(Student student);
 
     public void deleteById(int id);

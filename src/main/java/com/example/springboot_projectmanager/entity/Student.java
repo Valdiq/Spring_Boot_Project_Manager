@@ -38,7 +38,7 @@ public class Student {
     private String password;
 
     @ManyToMany(mappedBy = "studentList", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
-   // @JoinTable(name = "students_projects", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
+    // @JoinTable(name = "students_projects", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
     private List<Project> projectList;
 
     public Student() {

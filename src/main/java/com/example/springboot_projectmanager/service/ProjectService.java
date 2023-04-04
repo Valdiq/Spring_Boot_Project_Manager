@@ -19,10 +19,10 @@ public interface ProjectService {
 
     public void deleteById(int id);
 
-    public List<Project> findAllByStatus(String status);
+    public List<Project> findAllByStatusIgnoreCase(String status);
 
     public List<Project> findAllByNameLikeIgnoreCase(String name);
 
-    public List<Project> findAllByNameAndStatus(String name, String status);
+    //  public List<Project> findAllByNameAndStatus(String name, String status);
 
 }
